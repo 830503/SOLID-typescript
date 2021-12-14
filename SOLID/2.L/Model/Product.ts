@@ -22,8 +22,6 @@ export class Product {
         return this._price;
     }
 
-    //The reason we call this function "calculateX" instead of using a getter on Price is because names communicate a lot of meaning between programmers.
-    //most programmers would assume a getPrice() would be a simple display of a property that is already calculated, but in fact this function does a (more expensive) operation to calculate on the fly.
     calculatePrice() : number {
         return this._discount.apply(this._price);
     }
