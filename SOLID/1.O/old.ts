@@ -1,5 +1,5 @@
 class Dog {
-    private _name;
+    private _name: any;
 
     set name(value) {
         this._name = value;
@@ -12,10 +12,14 @@ class Dog {
     get type() {
         return 'dog';
     }
+
+    public makeSound(animal: object) : string {
+        return 'Woef';
+    }
 }
 
 class Cat {
-    private _name;
+    private _name: any;
 
     set name(value) {
         this._name = value;
@@ -28,10 +32,14 @@ class Cat {
     get type() {
         return 'cat';
     }
+
+    public makeSound(animal: object) : string {
+        return 'Miaw';
+    }
 }
 
 class Parrot {
-    private _name;
+    private _name: any;
 
     set name(value) {
         this._name = value;
@@ -43,6 +51,30 @@ class Parrot {
 
     get type() {
         return 'parrot';
+    }
+
+    public makeSound(animal: object) : string {
+        return 'I am a pirate';
+    }
+}
+
+class Bear {
+    private _name: any;
+
+    set name(value) {
+        this._name = value;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    get type() {
+        return 'bear';
+    }
+
+    public makeSound(animal: object) : string {
+        return 'Growl';
     }
 }
 
@@ -57,24 +89,15 @@ class Zoo {
         return this._animals;
     }
 
-    public makeSound(animal: object) : string {
-        switch(animal.type) {
-            case 'cat':
-                return 'Miauw';
-            case 'dog':
-                return 'Woef';
-            case 'parrot':
-                return 'I am a pirate';
-            default:
-                throw new Error('Unknown type: '+ animal.type);
-        }
-    }
 }
+
+
 let zoo = new Zoo;
 zoo.addAnimal(new Cat);
 zoo.addAnimal(new Dog);
 zoo.addAnimal(new Parrot);
+zoo.addAnimal(new Bear);
 
 zoo.animals.forEach((animal) => {
-    document.querySelector('#target').innerHTML += (animal.type + ": " + zoo.makeSound(animal) + "<br>");
+    document.querySelector('#target').innerHTML += (animal.type + ": " + animal.makeSound(animal) + "<br>");
 });
