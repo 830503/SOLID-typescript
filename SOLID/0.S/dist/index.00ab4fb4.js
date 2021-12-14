@@ -527,157 +527,139 @@ setInterval(function() {
 }, 1000);
 
 },{"./Model/Fuel":"lSgyV","./Model/Engine":"6Zx5Y","./Model/Car":"4U4Pg","./Model/MusicPlayer":"3fHXH"}],"lSgyV":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Fuel = void 0;
-var Fuel1 = function() {
-    function Fuel(MAXIMUM_FUEL_CAPACITY) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Fuel", ()=>Fuel
+);
+class Fuel {
+    constructor(MAXIMUM_FUEL_CAPACITY){
         this._fuel = 0;
         this.MAXIMUM_FUEL_CAPACITY = MAXIMUM_FUEL_CAPACITY;
     }
-    Object.defineProperty(Fuel.prototype, "getFuel", {
-        get: function() {
-            return this._fuel;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Fuel.prototype, "setFuel", {
-        set: function(value) {
-            this._fuel = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Fuel.prototype.addFuel = function(fuel) {
+    get getFuel() {
+        return this._fuel;
+    }
+    set setFuel(value) {
+        this._fuel = value;
+    }
+    addFuel(fuel) {
         this._fuel = Math.min(fuel + this._fuel, this.MAXIMUM_FUEL_CAPACITY);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
     };
-    return Fuel;
-}();
-exports.Fuel = Fuel1;
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}],"6Zx5Y":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Engine = void 0;
-var Engine1 = function() {
-    function Engine(fuel) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Engine", ()=>Engine
+);
+class Engine {
+    constructor(fuel){
         this._engineStatus = false;
         this.FUEL_MILEAGE = 10;
         this._fuel = fuel;
     }
-    Object.defineProperty(Engine.prototype, "fuel", {
-        get: function() {
-            return this._fuel;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Engine.prototype, "engineStatus", {
-        get: function() {
-            return this._engineStatus;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Engine.prototype, "fuelMileage", {
-        get: function() {
-            return this.FUEL_MILEAGE;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Engine.prototype.turnEngineOn = function() {
+    get fuel() {
+        return this._fuel;
+    }
+    get engineStatus() {
+        return this._engineStatus;
+    }
+    get fuelMileage() {
+        return this.FUEL_MILEAGE;
+    }
+    turnEngineOn() {
         this._engineStatus = true;
-    };
-    Engine.prototype.turnEngineOff = function() {
+    }
+    turnEngineOff() {
         this._engineStatus = false;
-    };
-    return Engine;
-}();
-exports.Engine = Engine1;
+    }
+}
 
-},{}],"4U4Pg":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Car = void 0;
-var Car1 = function() {
-    function Car(engine, musicPlayer) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"4U4Pg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Car", ()=>Car
+);
+class Car {
+    constructor(engine, musicPlayer){
         this._miles = 0;
         this._engine = engine;
         this._musicPlayer = musicPlayer;
     }
-    Object.defineProperty(Car.prototype, "miles", {
-        get: function() {
-            return this._miles;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Car.prototype, "engine", {
-        get: function() {
-            return this._engine;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Car.prototype, "musicPlayer", {
-        get: function() {
-            return this._musicPlayer;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Car.prototype.drive = function() {
+    get miles() {
+        return this._miles;
+    }
+    get engine() {
+        return this._engine;
+    }
+    get musicPlayer() {
+        return this._musicPlayer;
+    }
+    drive() {
         if (this._engine.engineStatus === false || this._engine.fuel.getFuel <= 0) //what I am doing here is a good principle called "failing early"
         // If you have some conditions you need to check, that will exclude most of the code in your function check that first
         // This prevents your "happy path" of code to be deeply indented.
         return;
         this._engine.fuel.setFuel -= 1;
         this._miles += this._engine.fuelMileage;
-    };
-    return Car;
-}();
-exports.Car = Car1;
+    }
+}
 
-},{}],"3fHXH":[function(require,module,exports) {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.MusicPlayer = void 0;
-var MusicPlayer1 = function() {
-    function MusicPlayer() {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"3fHXH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MusicPlayer", ()=>MusicPlayer
+);
+class MusicPlayer {
+    constructor(){
         this._musicLevel = 0;
         this._oldMusicLevel = 50;
     }
-    Object.defineProperty(MusicPlayer.prototype, "musicLevel", {
-        get: function() {
-            return this._musicLevel;
-        },
-        set: function(value) {
-            this._musicLevel = value;
-            this._oldMusicLevel = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    MusicPlayer.prototype.turnMusicOn = function() {
+    get musicLevel() {
+        return this._musicLevel;
+    }
+    set musicLevel(value) {
+        this._musicLevel = value;
+        this._oldMusicLevel = value;
+    }
+    turnMusicOn() {
         this._musicLevel = this._oldMusicLevel;
-    };
-    MusicPlayer.prototype.turnMusicOff = function() {
+    }
+    turnMusicOff() {
         this._musicLevel = 0;
-    };
-    return MusicPlayer;
-}();
-exports.MusicPlayer = MusicPlayer1;
+    }
+}
 
-},{}]},["1pZed","bBp0N"], "bBp0N", "parcelRequire94c2")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}]},["1pZed","bBp0N"], "bBp0N", "parcelRequire94c2")
 
 //# sourceMappingURL=index.00ab4fb4.js.map
