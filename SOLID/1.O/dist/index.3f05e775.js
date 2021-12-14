@@ -1,125 +1,76 @@
-var Dog1 = function() {
-    function Dog() {
+class Dog {
+    set name(value) {
+        this._name = value;
     }
-    Object.defineProperty(Dog.prototype, "name", {
-        get: function() {
-            return this._name;
-        },
-        set: function(value) {
-            this._name = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Dog.prototype, "type", {
-        get: function() {
-            return 'dog';
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Dog.prototype.makeSound = function(animal) {
+    get name() {
+        return this._name;
+    }
+    get type() {
+        return 'dog';
+    }
+    makeSound(animal5) {
         return 'Woef';
-    };
-    return Dog;
-}();
-var Cat1 = function() {
-    function Cat() {
     }
-    Object.defineProperty(Cat.prototype, "name", {
-        get: function() {
-            return this._name;
-        },
-        set: function(value) {
-            this._name = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Cat.prototype, "type", {
-        get: function() {
-            return 'cat';
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Cat.prototype.makeSound = function(animal) {
+}
+class Cat {
+    set name(value1) {
+        this._name = value1;
+    }
+    get name() {
+        return this._name;
+    }
+    get type() {
+        return 'cat';
+    }
+    makeSound(animal1) {
         return 'Miaw';
-    };
-    return Cat;
-}();
-var Parrot1 = function() {
-    function Parrot() {
     }
-    Object.defineProperty(Parrot.prototype, "name", {
-        get: function() {
-            return this._name;
-        },
-        set: function(value) {
-            this._name = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Parrot.prototype, "type", {
-        get: function() {
-            return 'parrot';
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Parrot.prototype.makeSound = function(animal) {
+}
+class Parrot {
+    set name(value2) {
+        this._name = value2;
+    }
+    get name() {
+        return this._name;
+    }
+    get type() {
+        return 'parrot';
+    }
+    makeSound(animal2) {
         return 'I am a pirate';
-    };
-    return Parrot;
-}();
-var Bear1 = function() {
-    function Bear() {
     }
-    Object.defineProperty(Bear.prototype, "name", {
-        get: function() {
-            return this._name;
-        },
-        set: function(value) {
-            this._name = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Bear.prototype, "type", {
-        get: function() {
-            return 'bear';
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Bear.prototype.makeSound = function(animal) {
+}
+class Bear {
+    set name(value3) {
+        this._name = value3;
+    }
+    get name() {
+        return this._name;
+    }
+    get type() {
+        return 'bear';
+    }
+    makeSound(animal3) {
         return 'Growl';
-    };
-    return Bear;
-}();
-var Zoo1 = function() {
-    function Zoo() {
+    }
+}
+class Zoo {
+    constructor(){
         this._animals = new Array();
     }
-    Zoo.prototype.addAnimal = function(animal) {
-        this._animals.push(animal);
-    };
-    Object.defineProperty(Zoo.prototype, "animals", {
-        get: function() {
-            return this._animals;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Zoo;
-}();
-var zoo = new Zoo1;
-zoo.addAnimal(new Cat1);
-zoo.addAnimal(new Dog1);
-zoo.addAnimal(new Parrot1);
-zoo.addAnimal(new Bear1);
-zoo.animals.forEach(function(animal) {
+    addAnimal(animal4) {
+        this._animals.push(animal4);
+    }
+    get animals() {
+        return this._animals;
+    }
+}
+let zoo = new Zoo;
+zoo.addAnimal(new Cat);
+zoo.addAnimal(new Dog);
+zoo.addAnimal(new Parrot);
+zoo.addAnimal(new Bear);
+zoo.animals.forEach((animal)=>{
     document.querySelector('#target').innerHTML += animal.type + ": " + animal.makeSound(animal) + "<br>";
 });
 
