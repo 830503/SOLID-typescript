@@ -6,7 +6,7 @@ export class NoDiscount implements Discount {
     constructor(value : number = 0) {
         this._value = value;
 
-        if(value <= 0) {
+        if(value < 0) {
             throw new Error('You cannot create a discount with a negative value');
         }
     }
