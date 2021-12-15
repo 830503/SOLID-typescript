@@ -476,9 +476,9 @@ const fuelLevelElement = document.querySelector('#fuel-level');
 const milesElement = document.querySelector('#miles-value');
 const audioElement = document.querySelector('#car-music');
 let musicPlayer = new _musicPlayer.MusicPlayer();
-let fuel = new _fuel.Fuel(100);
-let engine = new _engine.Engine(fuel);
-let car = new _car.Car(engine, musicPlayer);
+let fuel = new _fuel.Fuel(100, 0, 10);
+let engine = new _engine.Engine(100);
+let car = new _car.Car(engine, musicPlayer, fuel);
 musicToggleElement.addEventListener('click', ()=>{
     if (car.musicPlayer.musicLevel === 0) {
         car.musicPlayer.turnMusicOn();
@@ -508,8 +508,8 @@ engineToggleElement.addEventListener('click', ()=>{
 });
 addFuelForm.addEventListener('submit', (event)=>{
     event.preventDefault();
-    car.engine.fuel.addFuel(Number(addFuelInput.value));
-    fuelLevelElement.innerText = car.engine.fuel.getFuel.toString();
+    car.fuel.addFuel(Number(addFuelInput.value));
+    fuelLevelElement.innerText = car.fuel.toString();
 });
 setInterval(()=>{
     car.drive();
@@ -517,7 +517,7 @@ setInterval(()=>{
     // this <cast> will only tell TypeScript that the value is a string, but the actual variable in JS is not changed in any way: it is in reality still a number
     milesElement.innerText = car.miles;
     // This .toString() will actually convert the value in JavaScript from an integer to a string
-    fuelLevelElement.innerText = car.engine.fuel.getFuel.toString();
+    fuelLevelElement.innerText = car.fuel.fuel.toString();
     if (car.musicPlayer.musicLevel === 0) audioElement.pause();
     else audioElement.play();
 }, 1000);
@@ -528,18 +528,24 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Fuel", ()=>Fuel
 );
 class Fuel {
-    constructor(MAXIMUM_FUEL_CAPACITY){
+    constructor(MAXIMUM_FUEL_CAPACITY, fuel, FUEL_MILEAGE){
         this._fuel = 0;
+        this.FUEL_MILEAGE = 10;
         this.MAXIMUM_FUEL_CAPACITY = MAXIMUM_FUEL_CAPACITY;
+        this._fuel = fuel;
+        this.FUEL_MILEAGE = FUEL_MILEAGE;
     }
-    get getFuel() {
+    get fuel() {
         return this._fuel;
     }
-    set setFuel(value) {
+    set fuel(value) {
         this._fuel = value;
     }
-    addFuel(fuel) {
-        this._fuel = Math.min(fuel + this._fuel, this.MAXIMUM_FUEL_CAPACITY);
+    get fuelMileage() {
+        return this.FUEL_MILEAGE;
+    }
+    addFuel(fuel1) {
+        this._fuel = Math.min(fuel1 + this._fuel, this.MAXIMUM_FUEL_CAPACITY);
     }
 }
 
@@ -579,13 +585,9 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Engine", ()=>Engine
 );
 class Engine {
-    constructor(fuel){
+    constructor(FUEL_MILEAGE){
         this._engineStatus = false;
-        this.FUEL_MILEAGE = 10;
-        this._fuel = fuel;
-    }
-    get fuel() {
-        return this._fuel;
+        this.FUEL_MILEAGE = FUEL_MILEAGE;
     }
     get engineStatus() {
         return this._engineStatus;
@@ -607,10 +609,11 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Car", ()=>Car
 );
 class Car {
-    constructor(engine, musicPlayer){
+    constructor(engine, musicPlayer, fuel){
         this._miles = 0;
         this._engine = engine;
         this._musicPlayer = musicPlayer;
+        this._fuel = fuel;
     }
     get miles() {
         return this._miles;
@@ -621,13 +624,16 @@ class Car {
     get musicPlayer() {
         return this._musicPlayer;
     }
+    get fuel() {
+        return this._fuel;
+    }
     drive() {
-        if (this._engine.engineStatus === false || this._engine.fuel.getFuel <= 0) //what I am doing here is a good principle called "failing early"
+        if (this._engine.engineStatus === false || this.fuel.fuel <= 0) //what I am doing here is a good principle called "failing early"
         // If you have some conditions you need to check, that will exclude most of the code in your function check that first
         // This prevents your "happy path" of code to be deeply indented.
         return;
-        this._engine.fuel.setFuel -= 1;
-        this._miles += this._engine.fuelMileage;
+        this.fuel.fuel -= 1;
+        this._miles += this.fuel.fuelMileage;
     }
 }
 

@@ -1,17 +1,17 @@
 import { Engine } from "./Engine";
 import { MusicPlayer } from "./MusicPlayer";
-
+import { Fuel } from "./Fuel";
 
 export class Car {
-
-    private _miles : number = 0;
     private _engine : Engine;
     private _musicPlayer : MusicPlayer;
-   
+    private _fuel: Fuel;
+    private _miles : number = 0;
 
-    constructor(engine: Engine, musicPlayer: MusicPlayer){
+    constructor(engine: Engine, musicPlayer: MusicPlayer, fuel: Fuel){
         this._engine = engine;
         this._musicPlayer = musicPlayer;
+        this._fuel = fuel;
     }
 
     get miles(): number {
@@ -26,18 +26,21 @@ export class Car {
         return this._musicPlayer;
     }
 
+    get fuel(): Fuel {
+        return this._fuel;
+    }
     
 
     drive() {
-        if(this._engine.engineStatus === false || this._engine.fuel.getFuel <= 0) {
+        if(this._engine.engineStatus === false || this.fuel.fuel <= 0) {
             //what I am doing here is a good principle called "failing early"
             // If you have some conditions you need to check, that will exclude most of the code in your function check that first
             // This prevents your "happy path" of code to be deeply indented.
             return;
         }
         
-        this._engine.fuel.setFuel -= 1;
-        this._miles += this._engine.fuelMileage;
+        this.fuel.fuel -= 1;
+        this._miles += this.fuel.fuelMileage;
     }
 
 }

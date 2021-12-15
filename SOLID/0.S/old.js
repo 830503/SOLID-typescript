@@ -15,9 +15,9 @@ const fuelLevelElement = document.querySelector('#fuel-level');
 const milesElement = document.querySelector('#miles-value');
 const audioElement = document.querySelector('#car-music');
 let musicPlayer = new MusicPlayer();
-let fuel = new Fuel(100);
-let engine = new Engine(fuel);
-let car = new Car(engine, musicPlayer);
+let fuel = new Fuel(100, 0, 10);
+let engine = new Engine(100);
+let car = new Car(engine, musicPlayer, fuel);
 musicToggleElement.addEventListener('click', () => {
     if (car.musicPlayer.musicLevel === 0) {
         car.musicPlayer.turnMusicOn();
@@ -47,8 +47,8 @@ engineToggleElement.addEventListener('click', () => {
 });
 addFuelForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    car.engine.fuel.addFuel(Number(addFuelInput.value));
-    fuelLevelElement.innerText = car.engine.fuel.getFuel.toString();
+    car.fuel.addFuel(Number(addFuelInput.value));
+    fuelLevelElement.innerText = car.fuel.toString();
 });
 setInterval(() => {
     car.drive();
@@ -56,7 +56,7 @@ setInterval(() => {
     // this <cast> will only tell TypeScript that the value is a string, but the actual variable in JS is not changed in any way: it is in reality still a number
     milesElement.innerText = (car.miles);
     // This .toString() will actually convert the value in JavaScript from an integer to a string
-    fuelLevelElement.innerText = car.engine.fuel.getFuel.toString();
+    fuelLevelElement.innerText = car.fuel.fuel.toString();
     if (car.musicPlayer.musicLevel === 0) {
         audioElement.pause();
     }

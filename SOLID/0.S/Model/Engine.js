@@ -1,11 +1,7 @@
 export class Engine {
-    constructor(fuel) {
+    constructor(FUEL_MILEAGE) {
         this._engineStatus = false;
-        this.FUEL_MILEAGE = 10;
-        this._fuel = fuel;
-    }
-    get fuel() {
-        return this._fuel;
+        this.FUEL_MILEAGE = FUEL_MILEAGE;
     }
     get engineStatus() {
         return this._engineStatus;
