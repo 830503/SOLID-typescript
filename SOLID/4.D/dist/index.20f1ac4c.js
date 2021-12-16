@@ -1,21 +1,24 @@
-var Oven1 = function() {
-    function Oven() {
-    }
-    Oven.prototype.lightGas = function() {
+// interface RestaurantInterface {
+//     _name: string;
+//     _instrument: InstrumentInterface;
+//     cook(item: string): void;
+// }
+class Oven {
+    turnOn() {
         setTimeout(function() {
             document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE GAS IS ON!</p>";
         }, 1000);
         console.log("THE GAS IS ON!"); //insert fart humor here
         this._isOn = true;
-    };
-    Oven.prototype.extinguishGas = function() {
+    }
+    turnOff() {
         setTimeout(function() {
             document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE GAS IS OFF!</p><hr>";
         }, 3000);
         console.log("THE GAS IS OFF!"); //insert fart humor here
         this._isOn = false;
-    };
-    Oven.prototype.bake = function(item) {
+    }
+    bake(item) {
         if (this._isOn) {
             setTimeout(function() {
                 document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : Now baking " + item + " !</p>";
@@ -27,29 +30,51 @@ var Oven1 = function() {
             }, 2000);
             console.log("there is no gas!"); //insert fart humor here
         }
-    };
-    return Oven;
-}();
-var Restaurant1 = function() {
-    function Restaurant(name) {
-        this._oven = new Oven1();
-        this._name = name;
     }
-    Restaurant.prototype.Cook = function(item) {
-        this._oven.lightGas();
-        this._oven.bake(item);
-        this._oven.extinguishGas();
-    };
-    return Restaurant;
-}();
-var bakery = new Restaurant1("Bakery");
-bakery.Cook("cookies"); //Now if we want to add a new restaurant with an ELECTRIC cooker, we are gonna be in a hot mess ...
- /*
+}
+class Stove {
+    turnOn() {
+        setTimeout(function() {
+            document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE GAS IS ON!</p>";
+        }, 1000);
+        console.log("THE GAS IS ON!"); //insert fart humor here
+        this._isOn = true;
+    }
+    turnOff() {
+        setTimeout(function() {
+            document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : THE GAS IS OFF!</p><hr>";
+        }, 3000);
+        console.log("THE GAS IS OFF!"); //insert fart humor here
+        this._isOn = false;
+    }
+    bake(item1) {
+        if (this._isOn) {
+            setTimeout(function() {
+                document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : Now baking " + item1 + " !</p>";
+            }, 2000);
+            console.log("Now baking " + item1 + "!");
+        } else {
+            setTimeout(function() {
+                document.getElementById('target').innerHTML += "<p>" + new Date().getHours() + ":" + new Date().getMinutes() + " : there is no gas!</p>";
+            }, 2000);
+            console.log("there is no gas!"); //insert fart humor here
+        }
+    }
+}
+class Restaurant {
+    constructor(name, instrument){
+        this._name = name;
+        this._instrument = instrument;
+    }
+    cook(item2) {
+        this._instrument.turnOn;
+        this._instrument.bake(item2);
+        this._instrument.turnOff;
+    }
+}
+//Now if we want to add a new restaurant with an ELECTRIC cooker, we are gonna be in a hot mess ...
 let bakery = new Restaurant("Bakery", new Oven());
-bakery.Cook("cookies");
-
-let crepery = new Restaurant("Crepery", new Stove());
-crepery.Cook("crepes");
- */ 
+bakery.cook("cookies"); // let crepery = new Restaurant("Crepery", new Stove());
+ // crepery.cook("crepes");
 
 //# sourceMappingURL=index.20f1ac4c.js.map

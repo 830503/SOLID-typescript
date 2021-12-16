@@ -1,18 +1,18 @@
 interface InstrumentInterface {
-    _isOn : boolean;
+    // _isOn : boolean;
     turnOn(): void;
     turnOff(): void;
     bake(item : string): void;
 }
 
-interface RestaurantInterface {
-    _name: string;
-    _instrument: InstrumentInterface;
-    cook(item: string): void;
-}
+// interface RestaurantInterface {
+//     _name: string;
+//     _instrument: InstrumentInterface;
+//     cook(item: string): void;
+// }
 
 class Oven implements InstrumentInterface {
-    _isOn! : boolean;
+    private _isOn: boolean;
 
     public turnOn() : void
     {
@@ -52,7 +52,7 @@ class Oven implements InstrumentInterface {
 }
 
 class Stove implements InstrumentInterface{
-    _isOn! : boolean;
+    private _isOn : boolean;
 
     public turnOn() : void
     {
@@ -91,7 +91,7 @@ class Stove implements InstrumentInterface{
     }
 }
 
-class Restaurant implements RestaurantInterface {
+class Restaurant{
     _name : string;
     _instrument : InstrumentInterface;
 
@@ -113,6 +113,6 @@ class Restaurant implements RestaurantInterface {
 let bakery = new Restaurant("Bakery", new Oven());
 bakery.cook("cookies");
 
-let crepery = new Restaurant("Crepery", new Stove());
-crepery.cook("crepes");
+// let crepery = new Restaurant("Crepery", new Stove());
+// crepery.cook("crepes");
  
