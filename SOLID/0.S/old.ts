@@ -55,7 +55,6 @@ engineToggleElement.addEventListener('click', () => {
 
 addFuelForm.addEventListener('submit', (event) => {
     event.preventDefault();
-
     car.fuel.addFuel(Number(addFuelInput.value));
     fuelLevelElement.innerText = car.fuel.toString();
 });
@@ -74,5 +73,4 @@ setInterval(() => {
     } else {
         audioElement.play();
     }
-
 }, 1000);
